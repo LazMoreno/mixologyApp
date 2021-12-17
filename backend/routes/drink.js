@@ -2,6 +2,7 @@ const express = require("express");
 const Drink = require("../models/Drink");
 const router = express.Router();
 
+
 //GET/allDrinks
 router.get("/", async (req, res) => {
   const drinks = await Drink.find();
@@ -12,8 +13,9 @@ router.get("/", async (req, res) => {
   }
 });
 
+
 //GET/drinkById
-router.get("./drink/:id", async (req, res) => {
+router.get("/drink/:id", async (req, res) => {
   const { id } = req.params;
   const singleDrink = await Drink.findById(id);
   try {
@@ -22,6 +24,7 @@ router.get("./drink/:id", async (req, res) => {
     return res.status(500).json({ message: "Couldn't retrieve the drink" });
   }
 });
+
 
 //POST/drink
 router.post("/drink", async (req, res) => {
@@ -34,6 +37,7 @@ router.post("/drink", async (req, res) => {
 });
 //PUT/drink => update
 router.put("/drink/:id", async (req, res) => {
+  const { id } = req.params;
   const drinkToUpdate = await Drink.findByIdAndUpdate(id, req.body, {
     new: true,
   });
